@@ -1,0 +1,148 @@
+{
+    "name": "multi-purpose-agent-trae",
+    "displayName": "Multi Purpose Agent for TRAE",
+    "description": "Automated TRAE workflow assistant with queue orchestration, CDP controls, and safety guardrails.",
+    "version": "1.0.0",
+    "publisher": "rodhayl",
+    "icon": "media/icon.png",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/rodhayl/multi-purpose-agent-TRAE"
+    },
+    "homepage": "https://open-vsx.org/extension/rodhayl/multi-purpose-agent-trae",
+    "bugs": {
+        "url": "https://github.com/rodhayl/multi-purpose-agent-TRAE/issues"
+    },
+    "categories": [
+        "Machine Learning",
+        "Other"
+    ],
+    "keywords": [
+        "trae",
+        "ai",
+        "auto-accept",
+        "automation",
+        "queue",
+        "cdp"
+    ],
+    "scripts": {
+        "test": "node test/scheduler.test.js && node test_scripts/test_cdp.js && node test/cdp_handler_fallback.test.js",
+        "analyze:continue-log": "node test_scripts/analyze_continue_log.js",
+        "compile": "esbuild extension.js --bundle --outfile=dist/extension.js --external:vscode --platform=node --format=cjs",
+        "vscode:prepublish": "npm run compile",
+        "package": "npx @vscode/vsce package --out multi-purpose-agent-for-trae-1.0.0.vsix",
+        "publish:openvsx": "npx ovsx publish",
+        "package:openvsx": "npx ovsx package"
+    },
+    "engines": {
+        "vscode": "^1.75.0"
+    },
+    "activationEvents": [
+        "onStartupFinished"
+    ],
+    "main": "dist/extension.js",
+    "contributes": {
+        "commands": [
+            {
+                "command": "auto-accept.toggle",
+                "title": "Multi Purpose Agent for TRAE: Toggle ON/OFF"
+            },
+            {
+                "command": "auto-accept.openSettings",
+                "title": "Multi Purpose Agent for TRAE: Settings & Pro"
+            },
+            {
+                "command": "auto-accept.debugCommand",
+                "title": "Multi Purpose Agent for TRAE: Execute Debug Command"
+            }
+        ],
+        "configuration": {
+            "title": "Multi Purpose Agent for TRAE",
+            "properties": {
+                "auto-accept.continue.autoClickOnOpenOrStart": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "When Multi Purpose Agent for TRAE is ON, automatically clicks the \"Continue\" banner when you open an agent conversation or when the app starts."
+                },
+                "auto-accept.schedule.enabled": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Enable scheduled prompts to keep the agent active."
+                },
+                "auto-accept.schedule.mode": {
+                    "type": "string",
+                    "enum": [
+                        "interval",
+                        "daily",
+                        "queue"
+                    ],
+                    "default": "interval",
+                    "description": "Mode for scheduled prompts: 'interval' (every X minutes), 'daily' (at specific time), or 'queue' (sequential execution)."
+                },
+                "auto-accept.schedule.value": {
+                    "type": "string",
+                    "default": "30",
+                    "description": "Value for schedule: Minutes for 'interval' mode (e.g. '30'), HH:MM for 'daily' mode (e.g. '17:00'), or max-wait seconds per item in 'queue' mode."
+                },
+                "auto-accept.schedule.prompt": {
+                    "type": "string",
+                    "default": "Status report please",
+                    "description": "The prompt text to send periodically (interval/daily modes)."
+                },
+                "auto-accept.schedule.prompts": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "default": [],
+                    "description": "Queue of prompts to execute sequentially (queue mode)."
+                },
+                "auto-accept.schedule.queueMode": {
+                    "type": "string",
+                    "enum": [
+                        "consume",
+                        "loop"
+                    ],
+                    "default": "consume",
+                    "description": "Queue behavior: 'consume' removes prompts after use, 'loop' cycles through them."
+                },
+                "auto-accept.schedule.silenceTimeout": {
+                    "type": "number",
+                    "default": 30,
+                    "minimum": 1,
+                    "maximum": 300,
+                    "description": "Seconds of no activity before considering a task complete and advancing the queue."
+                },
+                "auto-accept.schedule.checkPrompt.enabled": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Enable intermediate check prompts between scheduled tasks."
+                },
+                "auto-accept.schedule.checkPrompt.text": {
+                    "type": "string",
+                    "default": "Make sure that the previous task was implemented fully as per requirements, implement all gaps, fix all bugs and test everything. Make sure that you reused existing code where possible instead of duplicating code. ultrathink internally avoiding verbosity.",
+                    "description": "The check prompt text to send after each task."
+                },
+                "auto-accept.debugMode.enabled": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Enable debug mode for AI agent programmatic control of all extension features via the debugCommand."
+                },
+                "auto-accept.cdp.port": {
+                    "type": "number",
+                    "default": 9005,
+                    "minimum": 1,
+                    "maximum": 65535,
+                    "description": "CDP remote debugging port Trae is launched with (default: 9005)."
+                }
+            }
+        }
+    },
+    "dependencies": {
+        "ws": "^8.13.0"
+    },
+    "devDependencies": {
+        "@vscode/vsce": "^3.7.0",
+        "esbuild": "^0.27.1"
+    }
+}

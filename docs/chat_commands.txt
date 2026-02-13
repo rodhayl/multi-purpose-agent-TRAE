@@ -1,0 +1,36 @@
+# TRAE Command Notes
+
+This file documents the command surface used by this extension in TRAE.
+
+## Extension Commands
+
+- auto-accept.toggle
+- auto-accept.openSettings
+- auto-accept.debugCommand
+- auto-accept.relaunch
+- auto-accept.startQueue
+- auto-accept.pauseQueue
+- auto-accept.resumeQueue
+- auto-accept.skipPrompt
+- auto-accept.stopQueue
+- auto-accept.showQueueMenu
+- auto-accept.resetSettings
+
+## Debug Actions (via auto-accept.debugCommand)
+
+Examples:
+- getQueueStatus
+- getConversations
+- getPromptHistory
+- evaluateInBrowser
+- getCDPConnections
+- sendPrompt
+- getSystemInfo
+- getLogs
+- getStats
+- getROIStats
+
+For details, see:
+- docs/DEBUG_TESTING.md
+- docs/LIVE_CDP_DEBUGGING.md
+- docs/SEND_MESSAGE_TRAE_TO_AGENT_CHAT.md

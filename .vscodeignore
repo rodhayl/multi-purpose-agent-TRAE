@@ -1,0 +1,44 @@
+# Exclude development files
+.env
+.git/**
+.gitignore
+.agent/**
+.trae/**
+
+# Exclude output files and logs
+*.txt
+*.log
+trace.log
+
+# Exclude test files
+test/**
+test_scripts/**
+test_fixtures/**
+*.test.js
+
+# Exclude all node_modules EXCEPT ws (required for Trae CDP)
+node_modules/**
+!node_modules/ws/**
+
+# Exclude source maps
+*.map
+
+# Exclude TypeScript source (we use bundled JS)
+*.ts
+tsconfig.json
+
+# Exclude package lock
+package-lock.json
+
+# Exclude build configs
+esbuild.config.js
+.eslintrc.json
+
+# Exclude local tooling and internal docs from packaged extension
+build.bat
+stop_all_processes.bat
+GEMINI.md
+media/Gemini_Generated_Image_*.png
+
+# Exclude VSIX files
+*.vsix

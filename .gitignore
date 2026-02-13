@@ -1,0 +1,61 @@
+# Environment
+.env
+.env.*
+.tmp/
+
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+*.vsix
+out/
+media/Gemini_Generated_Image_*.png
+
+# Logs and output files
+*.log
+auto-accept-cdp-TRAE.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# IDE
+.vscode/
+*.code-workspace
+.idea/
+GEMINI.md
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Test artifacts and temporary files
+full_test_*.html
+test_*.html
+*_test.html
+*_test_results.*
+verify_*.js
+*.tmp
+*.temp
+
+# Runtime/debug artifacts
+coverage/
+.nyc_output/
+*.pid
+
+# Debug and profiling
+*.cpuprofile
+*.heapsnapshot
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Extension packaging scratch
+.vsce/
+
+# Local baseline snapshot
+auto-accept-agent/

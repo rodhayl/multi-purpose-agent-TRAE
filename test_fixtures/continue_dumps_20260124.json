@@ -1,0 +1,26 @@
+[
+  {
+    "sourceFile": "restored-fixture-20260124.json",
+    "payload": {
+      "diag": {
+        "scan": {
+          "scannedElements": 120,
+          "shadowScopeCount": 0
+        },
+        "banner": {
+          "detected": false
+        },
+        "continue": {
+          "totalCandidates": 0
+        },
+        "state": {
+          "isRunning": true
+        }
+      },
+      "dump": {
+        "scannedElements": 120,
+        "totalCandidates": 0
+      }
+    }
+  }
+]
